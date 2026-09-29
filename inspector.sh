@@ -9,8 +9,10 @@ is_docker_hub_image() {
 
     # Remove the digest if present (after '@')
     remainder="${remainder%%@*}"
-    # Remove the tag if present (after ':')
-    remainder="${remainder%%:*}"
+    # Remove the tag if present, from the image name only, never from a registry port
+    if [[ "${remainder##*/}" == *:* ]]; then
+        remainder="${remainder%:*}"
+    fi
 
     # Check if there is a registry component (part before the first '/')
     if [[ "$remainder" =~ ^([^/]+)/(.+)$ ]]; then
