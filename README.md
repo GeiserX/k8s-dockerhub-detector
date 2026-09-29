@@ -4,14 +4,25 @@
 
 <h1 align="center">k8s-dockerhub-detector</h1>
 
+<p align="center">Lists every pod in a Kubernetes cluster that still pulls images from Docker Hub, so you can move them before the pull rate limit bites.</p>
+
 <p align="center">
-  Detects where DockerHub is still used in a Kubernetes cluster.
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/GeiserX/k8s-dockerhub-detector" alt="License"></a>
 </p>
 
 ---
 
-Due to the incoming rate limit from DockerHub, there is a need to migrate away from it. This piece of software detects where in the cluster DockerHub is still used.
+A bash script over `kubectl`: it reads the images of the containers and init containers of every pod, treats an image with no registry host (or with `docker.io`) as Docker Hub, prints the matching pods grouped by namespace, and ends with totals of all and of distinct Docker Hub images.
 
-## Usage
+## Quick start
 
-Save the bash script to your PATH, apply `chmod +x inspector.sh` and then you can use it as `bash inspector.sh [-n namespace]`
+```bash
+curl -O https://raw.githubusercontent.com/GeiserX/k8s-dockerhub-detector/main/inspector.sh
+bash inspector.sh              # every namespace; add -n <namespace> for one
+```
+
+Needs `kubectl` pointed at the cluster and bash 4 or newer (the script uses associative arrays; macOS ships bash 3.2, so use Homebrew's bash there).
+
+## License
+
+[GPL-3.0-or-later](LICENSE)
