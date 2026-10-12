@@ -23,6 +23,10 @@ bash inspector.sh              # every namespace; add -n <namespace> for one
 
 Needs `kubectl` pointed at the cluster and bash 4 or newer (the script uses associative arrays; macOS ships bash 3.2, so use Homebrew's bash there).
 
+## Origin
+
+Written and run in early 2025, when Docker announced that unauthenticated pulls would drop to 10 per hour per IPv4 address (from the 100 per 6 hours set in November 2020) starting 1 April 2025. Clusters that pulled everything from Docker Hub had weeks to find and move those images, and this script was the inventory. Docker later held the old limits, but the need to know what still pulls from Docker Hub did not go away. The script was published here on 26 April 2025, after it had done that job.
+
 ## License
 
 [GPL-3.0-or-later](LICENSE)
